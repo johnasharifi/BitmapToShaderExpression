@@ -3,10 +3,16 @@
 
 #include "pch.h"
 #include <iostream>
+#include "ReadFile.h"
 
 int main()
 {
     std::cout << "Hello World!\n"; 
+
+	std::string text = ReadFile::ReadText("GXvmX.csv");
+	std::map<Pixel, int> sparsePixelData = ReadFile::TextToSparsePixels(text);
+
+	std::cout << "whitespace count " << sparsePixelData[Pixel{ 1.0, 1.0, 1.0 }] << std::endl;
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
