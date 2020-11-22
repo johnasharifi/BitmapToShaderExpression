@@ -2,11 +2,13 @@
 
 #include <string>
 #include <iostream>
+#include <fstream>
+#include <sstream>
 
 class ReadFile
 {
 public:
-	static std::string ReadCSV(const::std::string&);
+	static std::string ReadText(const::std::string&);
 	static float* imageMatrix(const::std::string&);
 };
 

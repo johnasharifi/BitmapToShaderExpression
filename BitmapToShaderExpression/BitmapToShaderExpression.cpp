@@ -9,8 +9,8 @@ int main()
 {
     std::cout << "Hello World!\n"; 
 
-	ReadFile::ReadCSV("test");
-	ReadFile::imageMatrix("test");
+	ReadFile::ReadText("GXvmX.csv");
+	// ReadFile::imageMatrix("test");
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
