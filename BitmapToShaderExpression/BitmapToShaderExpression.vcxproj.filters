@@ -43,6 +43,9 @@
     <None Include="GXvmX.csv">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="GXvmX_orig.csv">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="BitmapToShaderExpression.rc">
