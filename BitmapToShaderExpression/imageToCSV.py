@@ -12,5 +12,5 @@ print(str(image.shape)[1:-1])
 for i in range(0, image.shape[0]):
 	for j in range(0, image.shape[1]):
 		data = [i] + [j] + (image[i,j,] * pixelMax).tolist()
-		dataString = ', '.join(map(str,data))
+		dataString = ', '.join(map(str,map(int,data)))
 		print(dataString)
