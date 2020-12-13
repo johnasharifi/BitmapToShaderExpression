@@ -11,5 +11,6 @@ class BoxPixelMap :
 public:
 	BoxPixelMap();
 	~BoxPixelMap();
+	Pixel Get(float uvu, float uvv);
 };
 

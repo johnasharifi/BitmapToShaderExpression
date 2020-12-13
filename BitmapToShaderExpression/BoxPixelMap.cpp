@@ -10,6 +10,6 @@ BoxPixelMap::~BoxPixelMap()
 {
 }
 
-Pixel Get(float uvu, float uvv) {
+Pixel BoxPixelMap::Get(float uvu, float uvv) {
 	return Pixel{ 0,0,0 };
 }
