@@ -24,6 +24,12 @@
     <ClInclude Include="ReadFile.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="IUVPixelMap.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BoxPixelMap.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -33,6 +39,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ReadFile.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="IUVPixelMap.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BoxPixelMap.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
