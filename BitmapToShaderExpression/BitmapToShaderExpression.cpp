@@ -4,6 +4,7 @@
 #include "pch.h"
 #include <iostream>
 #include "ReadFile.h"
+#include "BoxPixelMap.h"
 
 int main()
 {
@@ -17,6 +18,10 @@ int main()
 	// Pixel px{ 0.5f, 0.6f, 0.9f };
 	// std::cout << "hardcoded rgb " << (std::string) px << std::endl;
 	std::cout << "rgb at index [32,32] = " << (std::string) ijPixelData[{32, 32}] << std::endl;
+
+	BoxPixelMap map = BoxPixelMap(0, 18.0f / 64, 0, 21.0f / 64, Pixel{255,255,255});
+
+	std::cout << "rgb for uv(0,0) is " << (std::string) map.Get(0, 0) << std::endl;
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu

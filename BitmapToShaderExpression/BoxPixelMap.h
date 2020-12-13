@@ -9,8 +9,16 @@ class BoxPixelMap :
 	public IUVPixelMap
 {
 public:
-	BoxPixelMap();
+	BoxPixelMap(float _uvumin, float _uvumax, float _uvvmin, float _uvvmax, const Pixel & _px);
 	~BoxPixelMap();
 	Pixel Get(float uvu, float uvv);
+
+private:
+	float uvumin;
+	float uvumax;
+	float uvvmin;
+	float uvvmax;
+
+	Pixel px;
 };
 
