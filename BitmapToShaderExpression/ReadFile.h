@@ -8,7 +8,7 @@
 #include <map>
 
 struct Pixel {
-	float r, g, b;
+	int r, g, b;
 	const int pixelConverter = 255;
 
 	// Have to define comparison op so that pixels can be sorted in map
