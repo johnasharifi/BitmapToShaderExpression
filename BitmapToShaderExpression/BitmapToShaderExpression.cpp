@@ -9,9 +9,9 @@ int main()
 {
     std::cout << "Hello World!\n"; 
 
-	std::string text = ReadFile::ReadText("GXvmX.csv");
+	std::string text = ReadFile::ReadText("GXvmX_64_64.csv");
 	// std::map<Pixel, int> sparsePixelData = ReadFile::TextToSparsePixels(text);
-	// std::cout << "whitespace count " << sparsePixelData[Pixel{ 1.0, 1.0, 1.0 }] << std::endl;
+	// std::cout << "whitespace count " << sparsePixelData[Pixel{ 1, 1, 1 }] << std::endl;
 
 	std::map<std::pair<int,int>, Pixel> ijPixelData = ReadFile::TextToPixelTable(text);
 	// Pixel px{ 0.5f, 0.6f, 0.9f };

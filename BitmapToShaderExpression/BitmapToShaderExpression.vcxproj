@@ -179,6 +179,9 @@
   <ItemGroup>
     <ResourceCompile Include="BitmapToShaderExpression.rc" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="GXvmX_64_64.png" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
