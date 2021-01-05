@@ -13,6 +13,9 @@ class PixelMapModel
 {
 private:
 	std::vector<PixelMapModel> subModels;
+	// Currently do a contained-in-box test for pixel span
+	int minx, miny, maxx, maxy;
+	Pixel m_Pixel;
 
 public:
 	PixelMapModel(std::map<std::pair<int, int>, Pixel> _map);
