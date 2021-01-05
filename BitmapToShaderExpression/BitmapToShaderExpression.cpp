@@ -5,6 +5,7 @@
 #include <iostream>
 #include "ReadFile.h"
 #include "BoxPixelMap.h"
+#include "PixelMapModel.h"
 
 int main()
 {
@@ -22,6 +23,15 @@ int main()
 	BoxPixelMap map = BoxPixelMap(0, 18.0f / 64, 0, 21.0f / 64, Pixel{255,255,255});
 
 	std::cout << "rgb for uv(0,0) is " << (std::string) map.Get(0, 0) << std::endl;
+
+	PixelMapModel ijPixelModel(ijPixelData);
+	for (int i = 24; i < 48; i++) {
+		Pixel ijPixelDataPixel = ijPixelData[{i, i}];
+		std::cout << "ijPixelDataPixel " << i << ", " << i << " has rgb " << (std::string) ijPixelDataPixel << std::endl;
+
+		Pixel ijPixelModelPixel = ijPixelModel.GetPixel(std::pair<int, int>(i, i));
+		std::cout << "ijPixelModelPixel " << i << ", " << i << " has rgb " << (std::string) ijPixelModelPixel << std::endl;
+	}
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
