@@ -21,6 +21,14 @@ struct Pixel {
 		stringStream << "r" << r << " g" << g << " b" << b;
 		return stringStream.str();
 	}
+
+	Pixel operator =(const Pixel& orig) {
+		Pixel px;
+		px.r = orig.r;
+		px.g = orig.g;
+		px.b = orig.b;
+		return px;
+	}
 };
 
 class ReadFile
