@@ -21,6 +21,11 @@ std::map<std::pair<int, int>, Pixel> ReadFile::TextToPixelTable(const::std::stri
 	std::istringstream iss(data);
 	std::string line;
 
+	int xmax, ymax, zmax;
+	std::string firstLine;
+	getline(iss, firstLine);
+	sscanf_s(firstLine.c_str(), "%d, %d, %d", &xmax, &ymax, &zmax);
+	
 	while (getline(iss, line)) {
 		int x, y, r, g, b;
 

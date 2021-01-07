@@ -173,6 +173,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="GXvmX.csv" />
+    <None Include="GXvmX_64_64.csv" />
     <None Include="GXvmX_orig.csv" />
     <None Include="HTMLPage.htm">
       <DeploymentContent>true</DeploymentContent>
