@@ -41,8 +41,8 @@ PixelMapModel::~PixelMapModel()
 
 bool PixelMapModel::Contains(std::pair<int, int> ijCoord)
 {
-	if (ijCoord.first >= minx && ijCoord.first <= maxx &&
-		ijCoord.second >= miny && ijCoord.second <= maxy)
+	if (ijCoord.first >= minx && ijCoord.first < maxx &&
+		ijCoord.second >= miny && ijCoord.second < maxy)
 		return true;
 
 	for (PixelMapModel elem : subModels) {
