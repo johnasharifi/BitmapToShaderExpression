@@ -29,6 +29,13 @@ struct Pixel {
 		px.b = orig.b;
 		return px;
 	}
+
+	/*
+	Define &= to be "RGB element-wise equality test"
+	*/
+	bool operator &=(const Pixel& right) {
+		return r == right.r && b == right.b && g == right.g;
+	}
 };
 
 class ReadFile
