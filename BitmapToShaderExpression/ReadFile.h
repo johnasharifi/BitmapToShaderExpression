@@ -12,7 +12,7 @@ struct Pixel {
 	const int pixelConverter = 255;
 
 	// Have to define comparison op so that pixels can be sorted in map
-	bool operator < (const Pixel other) const {
+	bool operator < (const Pixel& other) const {
 		return r < other.r && g < other.g && b < other.b;
 	}
 
