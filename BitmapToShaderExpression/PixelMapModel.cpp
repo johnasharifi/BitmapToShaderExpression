@@ -6,8 +6,14 @@ PixelMapModel::PixelMapModel(std::map<std::pair<int, int>, Pixel> _map)
 	subModels = std::vector<PixelMapModel>();
 
 	// objective: for now, create a single sub-PixelMapModel for each ij coordinate
+	std::pair<int, int> lowest = _map.begin()->first;
+	std::pair<int, int> highest = _map.rbegin()->first;
+	minx = lowest.first;
+	miny = lowest.second;
+	maxx = highest.first + 1;
+	maxy = highest.second + 1;
 
-	// case: is an n-element pixel map of many pixels
+	// case: is an n-element pixel map
 	if (_map.size() > 1) {
 		for (std::pair<std::pair<int, int>, Pixel> kv : _map) {
 			// create a map with just one pair - coord ij to Pixel ij
@@ -23,11 +29,6 @@ PixelMapModel::PixelMapModel(std::map<std::pair<int, int>, Pixel> _map)
 	else {
 		// for now just iterate through all elements. should just be 1 element...!
 		for (std::pair<std::pair<int, int>, Pixel> kv : _map) {
-			minx = kv.first.first;
-			miny = kv.first.second;
-			maxx = kv.first.first + 1;
-			maxy = kv.first.second + 1;
-
 			m_Pixel.r = kv.second.r;
 			m_Pixel.g = kv.second.g;
 			m_Pixel.b = kv.second.b;
@@ -46,7 +47,7 @@ bool PixelMapModel::Contains(std::pair<int, int> ijCoord)
 		return true;
 
 	for (PixelMapModel elem : subModels) {
-		if (elem.Contains(ijCoord)) return elem.Contains(ijCoord);
+		if (elem.Contains(ijCoord)) return true;
 	}
 
 	return false;
