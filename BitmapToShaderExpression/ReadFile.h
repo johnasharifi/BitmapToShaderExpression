@@ -13,7 +13,9 @@ struct Pixel {
 
 	// Have to define comparison op so that pixels can be sorted in map
 	bool operator < (const Pixel& other) const {
-		return r < other.r && g < other.g && b < other.b;
+		return r < other.r ||
+			r == other.r && g < other.g ||
+			r == other.r && g == other.g && b < other.b;
 	}
 
 	operator std::string() {
