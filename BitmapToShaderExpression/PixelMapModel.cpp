@@ -1,6 +1,10 @@
 #include "pch.h"
 #include "PixelMapModel.h"
 
+namespace {
+	const int pixelMapChunkMaxCount = 64;
+}
+
 PixelMapModel::PixelMapModel(std::map<std::pair<int, int>, Pixel> _map)
 {
 	subModels = std::vector<PixelMapModel>();
@@ -13,8 +17,46 @@ PixelMapModel::PixelMapModel(std::map<std::pair<int, int>, Pixel> _map)
 	maxx = highest.first + 1;
 	maxy = highest.second + 1;
 
+	// case: is such a big chunk, that we should cut down
+	// TODO fix issue where large solid color chunks are needlessly broken down into smaller chunks
+	if (_map.size() > pixelMapChunkMaxCount) {
+		std::pair<int, int> medial((lowest.first + highest.first) / 2, (lowest.second + highest.second) / 2);
+
+		std::map<std::pair<int, int>, Pixel> mapLL;
+		std::map<std::pair<int, int>, Pixel> mapLG;
+		std::map<std::pair<int, int>, Pixel> mapGL;
+		std::map<std::pair<int, int>, Pixel> mapGG;
+
+		// iterate through all pixels, send into one of 4 sub-models
+		for (std::pair<std::pair<int, int>, Pixel> kv : _map) {
+			if (kv.first.first < medial.first && kv.first.second < medial.second) {
+				// case: pixel x < medial x and pixel y < medial y
+				mapLL.emplace(kv.first, kv.second);
+			}
+			else if (kv.first.first < medial.first) {
+				// case: pixel x < medial x and pixel y >= medial y
+				mapLG.emplace(kv.first, kv.second);
+			}
+			else if (kv.first.second < medial.second) {
+				// case: pixel x >= medial x and pixel y < medial y
+				mapGL.emplace(kv.first, kv.second);
+			}
+			else {
+				// case: pixel x >= medial x and pixel y >= medial y
+				mapGG.emplace(kv.first, kv.second);
+			}
+		}
+
+		// now spawn sub-models for each map
+		// and register each sub-model
+		for (auto subMap : {mapLL, mapLG, mapGL, mapGG}) {
+			PixelMapModel subModel(subMap);
+			subModels.push_back(subModel);
+		}
+	}
+
 	// case: is an n-element pixel map
-	if (_map.size() > 1) {
+	else if (_map.size() > 1) {
 		for (std::pair<std::pair<int, int>, Pixel> kv : _map) {
 			// create a map with just one pair - coord ij to Pixel ij
 			std::map<std::pair<int, int>, Pixel> ijMap;
