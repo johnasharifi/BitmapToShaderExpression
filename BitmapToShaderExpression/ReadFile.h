@@ -24,12 +24,11 @@ struct Pixel {
 		return stringStream.str();
 	}
 
-	Pixel operator =(const Pixel& orig) {
-		Pixel px;
-		px.r = orig.r;
-		px.g = orig.g;
-		px.b = orig.b;
-		return px;
+	Pixel operator=(const Pixel& orig) {
+		this->r = orig.r;
+		this->g = orig.g;
+		this->b = orig.b;
+		return *this;
 	}
 
 	/*
