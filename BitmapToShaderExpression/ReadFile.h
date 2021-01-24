@@ -24,12 +24,16 @@ struct Pixel {
 		return stringStream.str();
 	}
 
-	Pixel operator =(const Pixel& orig) {
-		Pixel px;
-		px.r = orig.r;
-		px.g = orig.g;
-		px.b = orig.b;
-		return px;
+	Pixel& operator=(const Pixel& rhs) {
+		if (this == &rhs) return *this;
+		// operator= should
+		// escape case where ptr to this == address of rhs
+		// take a const address of original value (right hand value)
+		// return left hand value so that we can do ops like x = y = z
+		this->r = rhs.r;
+		this->g = rhs.g;
+		this->b = rhs.b;
+		return *this;
 	}
 
 	/*
