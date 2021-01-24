@@ -9,17 +9,29 @@ PixelMapModel::PixelMapModel(std::map<std::pair<int, int>, Pixel> _map)
 {
 	subModels = std::vector<PixelMapModel>();
 
-	// objective: for now, create a single sub-PixelMapModel for each ij coordinate
+	// check how many unique pixels will be in this map
+	std::set<Pixel> pixelUniques;
+	for (std::pair<std::pair<int, int>, Pixel> kv : _map) {
+		pixelUniques.insert(kv.second);
+	}
+
+	// note the span of ij coordinates from lowest corner to highest corner
 	std::pair<int, int> lowest = _map.begin()->first;
 	std::pair<int, int> highest = _map.rbegin()->first;
 	minx = lowest.first;
 	miny = lowest.second;
 	maxx = highest.first + 1;
 	maxy = highest.second + 1;
-
+	
+	// case: is a large collection of exact same pixel
+	if (pixelUniques.size() == 1) {
+		// minxy / maxxy already set
+		// just need to set my pixel
+		m_Pixel = _map.begin()->second;
+	}
 	// case: is such a big chunk, that we should cut down
 	// TODO fix issue where large solid color chunks are needlessly broken down into smaller chunks
-	if (_map.size() > pixelMapChunkMaxCount) {
+	else if (_map.size() > pixelMapChunkMaxCount) {
 		std::pair<int, int> medial((lowest.first + highest.first) / 2, (lowest.second + highest.second) / 2);
 
 		std::map<std::pair<int, int>, Pixel> mapLL;
