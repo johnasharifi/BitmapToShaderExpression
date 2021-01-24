@@ -30,7 +30,6 @@ PixelMapModel::PixelMapModel(std::map<std::pair<int, int>, Pixel> _map)
 		m_Pixel = _map.begin()->second;
 	}
 	// case: is such a big chunk, that we should cut down
-	// TODO fix issue where large solid color chunks are needlessly broken down into smaller chunks
 	else if (_map.size() > pixelMapChunkMaxCount) {
 		std::pair<int, int> medial((lowest.first + highest.first) / 2, (lowest.second + highest.second) / 2);
 
