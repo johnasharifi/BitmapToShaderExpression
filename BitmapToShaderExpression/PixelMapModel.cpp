@@ -98,7 +98,13 @@ PixelMapModel::operator std::string() {
 			std::setw(digitPadSize) << minx << " < x < " << std::setw(digitPadSize) << maxx <<
 			", " <<
 			std::setw(digitPadSize) << miny << " < y < " << std::setw(digitPadSize) << maxy <<
-			". Pixel " << (std::string) m_Pixel;
+			": pixel " << (std::string) m_Pixel;
+	}
+	else {
+		// case: have submodels. each submodel is a new line, tabbed in
+		for (PixelMapModel elem : subModels) {
+			stringStream << "\t" << (std::string) elem << std::endl;
+		}
 	}
 
 	return stringStream.str();
