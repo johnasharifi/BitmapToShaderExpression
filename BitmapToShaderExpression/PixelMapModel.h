@@ -3,6 +3,7 @@
 #include <map>
 #include <set>
 #include "ReadFile.h"
+#include <iomanip>
 
 /*
 * This class will take a map of ij coordinates and Pixels, and assemble a recursive structure which 
@@ -23,5 +24,7 @@ public:
 	~PixelMapModel();
 	bool Contains(std::pair<int, int> ijCoord);
 	Pixel GetPixel(std::pair<int, int> ijCoord);
+
+	operator std::string();
 };
 
