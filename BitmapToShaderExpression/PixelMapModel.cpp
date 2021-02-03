@@ -89,6 +89,21 @@ PixelMapModel::PixelMapModel(std::map<std::pair<int, int>, Pixel> _map)
 	}
 }
 
+PixelMapModel::operator std::string() {
+	const int digitPadSize = 3;
+	std::ostringstream stringStream;
+
+	if (subModels.size() == 0) {
+		stringStream <<
+			std::setw(digitPadSize) << minx << " < x < " << std::setw(digitPadSize) << maxx <<
+			", " <<
+			std::setw(digitPadSize) << miny << " < y < " << std::setw(digitPadSize) << maxy <<
+			". Pixel " << (std::string) m_Pixel;
+	}
+
+	return stringStream.str();
+}
+
 PixelMapModel::~PixelMapModel()
 {
 }
