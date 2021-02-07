@@ -78,15 +78,6 @@ PixelMapModel::PixelMapModel(std::map<std::pair<int, int>, Pixel> _map)
 			subModels.push_back(ijModel);
 		}
 	}
-	// case: is an ij pixel map with a single element
-	else {
-		// for now just iterate through all elements. should just be 1 element...!
-		for (std::pair<std::pair<int, int>, Pixel> kv : _map) {
-			m_Pixel.r = kv.second.r;
-			m_Pixel.g = kv.second.g;
-			m_Pixel.b = kv.second.b;
-		}
-	}
 }
 
 PixelMapModel::operator std::string() {
