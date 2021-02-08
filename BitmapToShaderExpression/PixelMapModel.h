@@ -25,6 +25,7 @@ public:
 	bool Contains(std::pair<int, int> ijCoord);
 	Pixel GetPixel(std::pair<int, int> ijCoord);
 
+	std::string getPixelSpan();
 	operator std::string();
 };
 
