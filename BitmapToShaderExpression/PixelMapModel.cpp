@@ -2,7 +2,7 @@
 #include "PixelMapModel.h"
 
 namespace {
-	const int pixelMapChunkMaxCount = 64;
+	const int pixelMapChunkMaxCount = 16;
 }
 
 PixelMapModel::PixelMapModel(std::map<std::pair<int, int>, Pixel> _map)
@@ -65,9 +65,8 @@ PixelMapModel::PixelMapModel(std::map<std::pair<int, int>, Pixel> _map)
 			subModels.push_back(subModel);
 		}
 	}
-
 	// case: is an n-element pixel map
-	else if (_map.size() > 1) {
+	else {
 		for (std::pair<std::pair<int, int>, Pixel> kv : _map) {
 			// create a map with just one pair - coord ij to Pixel ij
 			std::map<std::pair<int, int>, Pixel> ijMap;
