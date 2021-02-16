@@ -100,9 +100,17 @@ PixelMapModel::operator std::string() {
 		stringStream << getPixelSpan();
 	}
 	else {
+		stringStream << getPixelSpan() << std::endl;
+
 		// case: have submodels. each submodel is a new line, tabbed in
 		for (PixelMapModel elem : subModels) {
-			stringStream << "\t" << (std::string) elem << std::endl;
+			std::stringstream ssElem((std::string) elem);
+			std::string holder;
+			// split the child's string content on newline
+			while (std::getline(ssElem, holder, '\n')) {
+				// shift all of the child steams over by 1 tab
+				stringStream << "\t" << holder << std::endl;
+			}
 		}
 	}
 
