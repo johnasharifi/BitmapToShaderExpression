@@ -121,8 +121,6 @@ PixelMapModel::PixelMapModel(std::map<std::pair<int, int>, Pixel> _map)
 			std::map<std::pair<int, int>, Pixel> ijMap;
 			ijMap.emplace(kv.first, kv.second);
 
-			std::pair<int, int> result = getSpanFrom(kv.first, _map);
-			
 			// create a model with just one value - ij
 			PixelMapModel ijModel(ijMap);
 			subModels.push_back(ijModel);
