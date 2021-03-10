@@ -2,7 +2,37 @@
 #include "PixelMapModel.h"
 
 namespace {
-	const int pixelMapChunkMaxCount = 16;
+	const int pixelMapChunkMaxCount = 32;
+}
+
+bool isFirstDimUniform(const std::pair<int, int> &init, const std::map<std::pair<int, int>, Pixel>& map, int span) {
+	Pixel initValue = map.at(init);
+	for (int i = init.first; i < init.first + span; ++i) {
+		std::pair<int, int> ij = std::pair<int, int>(i, init.second);
+		// if not in map, or a mismatch in R/G/B, return false
+		if (map.count(ij) == 0) {
+			return false;
+		}
+		if (!(initValue &= map.at(ij))) {
+			Pixel p = map.at(ij);
+			return false;
+		}
+	}
+	// must all match
+	return true;
+}
+
+std::pair<int, int> getSpanFrom(const std::pair<int, int> &init, const std::map<std::pair<int, int>, Pixel>& map) {
+	const int max = 8;
+
+	int maxi = 0;
+	int maxj = 0;
+
+	while (isFirstDimUniform(init, map, maxi + 1)) {
+		++maxi;
+	}
+
+	return std::pair<int, int>(init.first + maxi, init.second);
 }
 
 PixelMapModel::PixelMapModel(std::map<std::pair<int, int>, Pixel> _map)
@@ -67,11 +97,19 @@ PixelMapModel::PixelMapModel(std::map<std::pair<int, int>, Pixel> _map)
 	}
 	// case: is an n-element pixel map
 	else {
+		// first case: take up as much space from first index, as possible, in single sub-map
+		std::pair<int, int> ijStart = _map.begin()->first;
+		std::pair<int, int> ijEnd = getSpanFrom(ijStart, _map);
+		std::cout << "\tconsolidate span from " << ijStart.first << ", " << ijStart.second << " to " << ijEnd.first << ", " << ijEnd.second << " as single map of pixel " << (std::string) _map.begin()->second << std::endl;
+
+		// fallback - add additional maps
 		for (std::pair<std::pair<int, int>, Pixel> kv : _map) {
 			// create a map with just one pair - coord ij to Pixel ij
 			std::map<std::pair<int, int>, Pixel> ijMap;
 			ijMap.emplace(kv.first, kv.second);
 
+			std::pair<int, int> result = getSpanFrom(kv.first, _map);
+			
 			// create a model with just one value - ij
 			PixelMapModel ijModel(ijMap);
 			subModels.push_back(ijModel);
