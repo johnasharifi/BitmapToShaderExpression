@@ -36,11 +36,11 @@ struct Pixel {
 		return *this;
 	}
 
-	bool operator ==(const Pixel& right) {
+	bool operator ==(const Pixel& right) const {
 		return r == right.r && b == right.b && g == right.g;
 	}
 
-	bool operator != (const Pixel& right) {
+	bool operator !=(const Pixel& right) const {
 		return !(*this == right);
 	}
 
