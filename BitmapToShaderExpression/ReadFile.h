@@ -18,7 +18,7 @@ struct Pixel {
 			r == other.r && g == other.g && b < other.b;
 	}
 
-	operator std::string() {
+	operator std::string() const {
 		std::ostringstream stringStream;
 		stringStream << "r" << r << " g" << g << " b" << b;
 		return stringStream.str();
