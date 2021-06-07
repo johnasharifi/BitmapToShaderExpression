@@ -32,31 +32,27 @@ std::pair<int, int> expandRectFrom(const std::pair<int, int> & init, const std::
 	int maxx = 0;
 	int maxy = 0;
 
-	// TODO track maxx, maxy in a std::pair<int,int>
-
 	Pixel target = map.at(init);
 
 	while (canExpandX || canExpandY) {
 		// if we haven't failed to expand x yet, then continue trying to expand x
 		if (canExpandX) {
-			std::pair<int, int> xLineStart{ init.first + maxx, init.second + 0};
-			std::pair<int, int> xLineEnd{init.first + maxx, init.second + maxy};
+			std::pair<int, int> xLineStart{ init.first + maxx + 1, init.second + 0};
+			std::pair<int, int> xLineEnd{init.first + maxx + 1, init.second + maxy};
 			canExpandX = isSamePixel(target, xLineStart, xLineEnd, map);
 			maxx += canExpandX;
 		}
 		
 		// if we haven't failed to expand y yet, then continue trying to expand y
 		if (canExpandY) {
-			std::pair<int, int> yLineStart{ init.first + 0, init.second + maxy};
-			std::pair<int, int> yLineEnd{ init.first + maxx, init.second + maxy};
+			std::pair<int, int> yLineStart{ init.first + 0, init.second + maxy + 1};
+			std::pair<int, int> yLineEnd{ init.first + maxx, init.second + maxy + 1};
 			canExpandY = isSamePixel(target, yLineStart, yLineEnd, map);
 			maxy += canExpandY;
 		}
 	}
 
-	std::pair<int, int>ender {init.first + maxx, init.second + maxy};
-
-	return ender;
+	return std::pair<int, int> {init.first + maxx, init.second + maxy};
 }
 
 bool isFirstDimUniform(const std::pair<int, int> &init, const std::map<std::pair<int, int>, Pixel>& map, int span) {
