@@ -96,6 +96,9 @@ std::pair<int, int> getSpanFrom(const std::pair<int, int> &init, const std::map<
 
 PixelMapModel::PixelMapModel(std::map<std::pair<int, int>, Pixel> _map)
 {
+	// in the future we might tolerate no elements in map
+	if (_map.size() == 0) std::cout << "no elements in map\n";
+
 	subModels = std::vector<PixelMapModel>();
 
 	// check how many unique pixels will be in this map
@@ -111,7 +114,7 @@ PixelMapModel::PixelMapModel(std::map<std::pair<int, int>, Pixel> _map)
 	miny = lowest.second;
 	maxx = highest.first + 1;
 	maxy = highest.second + 1;
-	
+
 	// case: is a large collection of exact same pixel
 	if (pixelUniques.size() == 1) {
 		// minxy / maxxy already set
@@ -158,21 +161,27 @@ PixelMapModel::PixelMapModel(std::map<std::pair<int, int>, Pixel> _map)
 	else {
 		// first case: take up as much space from first index, as possible, in single sub-map
 		std::pair<int, int> ijStart = _map.begin()->first;
-		std::pair<int, int> ijEnd = getSpanFrom(ijStart, _map);
+
+		std::pair<int, int> ijEnd = expandRectFrom(ijStart, _map);
 		
 		std::map<std::pair<int, int>, Pixel> subspanMap;
 		for (int i = ijStart.first; i < ijEnd.first; ++i) {
-			std::pair<int, int> ij(i, ijEnd.second);
-			// insert into the subspan map
-				
-			// remove from the parent map
-			if (_map.count(ij) > 0) {
-				subspanMap.emplace(ij, _map.at(ij));
-				_map.erase(ij);
+			for (int j = ijStart.second; j < ijEnd.second; ++j) {
+				// insert into the subspan map
+				std::pair<int, int> ij{ i, j };
+
+				if (_map.count(ij) > 0) {
+					// remove from the parent map
+					subspanMap.emplace(ij, _map.at(ij));
+					_map.erase(ij);
+				}
 			}
 		}
-		PixelMapModel subspanModel(subspanMap);
-		subModels.push_back(subspanModel);
+
+		if (subspanMap.size() > 0) {
+			PixelMapModel subspanModel(subspanMap);
+			subModels.push_back(subspanModel);
+		}
 
 		// fallback - add additional maps
 		for (std::pair<std::pair<int, int>, Pixel> kv : _map) {
