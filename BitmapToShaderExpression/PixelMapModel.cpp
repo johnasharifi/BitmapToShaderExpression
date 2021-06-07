@@ -22,13 +22,16 @@ bool isFirstDimUniform(const std::pair<int, int> &init, const std::map<std::pair
 	return true;
 }
 
+/*
+	From an initial position, pushes out a rect until the rect is a moderately large size
+*/
 std::pair<int, int> getSpanFrom(const std::pair<int, int> &init, const std::map<std::pair<int, int>, Pixel>& map) {
 	const int max = 8;
 
 	int maxi = 0;
 	int maxj = 0;
 
-	while (isFirstDimUniform(init, map, maxi + 1)) {
+	while (isFirstDimUniform(init, map, maxi + 1) && maxi < max) {
 		++maxi;
 	}
 

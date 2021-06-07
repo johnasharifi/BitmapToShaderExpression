@@ -40,6 +40,10 @@ struct Pixel {
 		return r == right.r && b == right.b && g == right.g;
 	}
 
+	bool operator != (const Pixel& right) {
+		return !(*this == right);
+	}
+
 	/*
 	Deprecate &=, now use equality operator
 	*/
