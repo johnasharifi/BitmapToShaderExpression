@@ -5,6 +5,52 @@ namespace {
 	const int pixelMapChunkMaxCount = 32;
 }
 
+bool isSamePixel(const std::pair<int, int>& init, const std::pair<int, int>& end, const std::map<std::pair<int, int>, Pixel>& map) {
+	Pixel initPixel = map.at(init);
+
+	for (int i = init.first; i < end.first; ++i) {
+		for (int j = init.second; j < end.second; ++j) {
+			std::pair<int, int> sample{ i,j };
+			if (map.count(sample) == 0) return false;
+			if (map.at(init) != initPixel) return false;
+		}
+	}
+
+	// must be supported
+	return true;
+}
+
+/*
+	Given a starting point (x,y), expand a rect out in +x and +y until we hit a different pixel color
+*/
+std::pair<int, int> expandRectFrom(const std::pair<int, int> & init, const std::map<std::pair<int, int>, Pixel>& map) {
+	const int max = 0;
+
+	bool canExpandX = true;
+	bool canExpandY = true;
+
+	int maxx = 0;
+	int maxy = 0;
+
+	while (canExpandX || canExpandY) {
+		// if we haven't failed to expand x yet, then continue trying to expand x
+		if (canExpandX) {
+			std::pair<int, int> xLineStart{ init.first + maxx + 1, init.second + 0};
+			std::pair<int, int> xLineEnd{init.first + maxx + 1, init.second + maxy};
+			canExpandX = isSamePixel(xLineStart, xLineEnd, map);
+		}
+		
+		// if we haven't failed to expand y yet, then continue trying to expand y
+		if (canExpandY) {
+			std::pair<int, int> yLineStart{ init.first + 0, init.second + maxy + 1 };
+			std::pair<int, int> yLineEnd{ init.first + maxx, init.second + maxy + 1 };
+			canExpandY = isSamePixel(yLineStart, yLineEnd, map);
+		}
+	}
+
+	return std::pair<int, int>{maxx, maxy};
+}
+
 bool isFirstDimUniform(const std::pair<int, int> &init, const std::map<std::pair<int, int>, Pixel>& map, int span) {
 	Pixel initValue = map.at(init);
 	for (int i = init.first; i < init.first + span; ++i) {
