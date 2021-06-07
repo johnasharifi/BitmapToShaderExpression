@@ -5,6 +5,9 @@ namespace {
 	const int pixelMapChunkMaxCount = 32;
 }
 
+/*
+	Given a map and a span from init to end, check that all pixels in that span (inclusive) match the provided comparison value
+*/
 bool isSamePixel(const Pixel& target, const std::pair<int, int>& init, const std::pair<int, int>& end, const std::map<std::pair<int, int>, Pixel>& map) {
 	if (map.count(init) == 0) return false;
 
@@ -50,41 +53,6 @@ std::pair<int, int> expandRectFrom(const std::pair<int, int> & init, const std::
 	}
 
 	return term;
-}
-
-bool isFirstDimUniform(const std::pair<int, int> &init, const std::map<std::pair<int, int>, Pixel>& map, int span) {
-	Pixel initValue = map.at(init);
-	for (int i = init.first; i < init.first + span; ++i) {
-		std::pair<int, int> ij = std::pair<int, int>(i, init.second);
-		// if not in map, or a mismatch in R/G/B, return false
-		if (map.count(ij) == 0) {
-			return false;
-		}
-		if (!(initValue == map.at(ij))) {
-			Pixel p = map.at(ij);
-			return false;
-		}
-	}
-	// must all match
-	return true;
-}
-
-/*
-	From an initial position, pushes out a rect until the rect is a moderately large size
-*/
-std::pair<int, int> getSpanFrom(const std::pair<int, int> &init, const std::map<std::pair<int, int>, Pixel>& map) {
-	const int max = 8;
-
-	int maxi = 0;
-	int maxj = 0;
-
-	std::pair<int,int> terminal = expandRectFrom(init, map);
-
-	while (isFirstDimUniform(init, map, maxi + 1) && maxi < max) {
-		++maxi;
-	}
-
-	return std::pair<int, int>(init.first + maxi, init.second);
 }
 
 PixelMapModel::PixelMapModel(std::map<std::pair<int, int>, Pixel> _map)
