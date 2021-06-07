@@ -36,11 +36,16 @@ struct Pixel {
 		return *this;
 	}
 
-	/*
-	Define &= to be "RGB element-wise equality test"
-	*/
-	bool operator &=(const Pixel& right) {
+	bool operator ==(const Pixel& right) {
 		return r == right.r && b == right.b && g == right.g;
+	}
+
+	/*
+	Deprecate &=, now use equality operator
+	*/
+	[[deprecated]]
+	bool operator &=(const Pixel& right) {
+		return *this == right;
 	}
 };
 

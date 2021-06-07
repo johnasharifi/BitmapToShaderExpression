@@ -13,7 +13,7 @@ bool isFirstDimUniform(const std::pair<int, int> &init, const std::map<std::pair
 		if (map.count(ij) == 0) {
 			return false;
 		}
-		if (!(initValue &= map.at(ij))) {
+		if (!(initValue == map.at(ij))) {
 			Pixel p = map.at(ij);
 			return false;
 		}
