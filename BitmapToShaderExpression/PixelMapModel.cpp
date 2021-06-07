@@ -24,35 +24,32 @@ bool isSamePixel(const Pixel& target, const std::pair<int, int>& init, const std
 	Given a starting point (x,y), expand a rect out in +x and +y until we hit a different pixel color
 */
 std::pair<int, int> expandRectFrom(const std::pair<int, int> & init, const std::map<std::pair<int, int>, Pixel>& map) {
-	const int max = 0;
-
 	bool canExpandX = true;
 	bool canExpandY = true;
 
-	int maxx = 0;
-	int maxy = 0;
-
 	Pixel target = map.at(init);
+
+	std::pair<int, int> term{ init.first, init.second };
 
 	while (canExpandX || canExpandY) {
 		// if we haven't failed to expand x yet, then continue trying to expand x
 		if (canExpandX) {
-			std::pair<int, int> xLineStart{ init.first + maxx + 1, init.second + 0};
-			std::pair<int, int> xLineEnd{init.first + maxx + 1, init.second + maxy};
+			std::pair<int, int> xLineStart{ term.first + 1, init.second};
+			std::pair<int, int> xLineEnd{term.first + 1, term.second};
 			canExpandX = isSamePixel(target, xLineStart, xLineEnd, map);
-			maxx += canExpandX;
+			term.first += canExpandX;
 		}
 		
 		// if we haven't failed to expand y yet, then continue trying to expand y
 		if (canExpandY) {
-			std::pair<int, int> yLineStart{ init.first + 0, init.second + maxy + 1};
-			std::pair<int, int> yLineEnd{ init.first + maxx, init.second + maxy + 1};
+			std::pair<int, int> yLineStart{ init.first, term.second + 1};
+			std::pair<int, int> yLineEnd{ term.first, term.second + 1};
 			canExpandY = isSamePixel(target, yLineStart, yLineEnd, map);
-			maxy += canExpandY;
+			term.second += canExpandY;
 		}
 	}
 
-	return std::pair<int, int> {init.first + maxx, init.second + maxy};
+	return term;
 }
 
 bool isFirstDimUniform(const std::pair<int, int> &init, const std::map<std::pair<int, int>, Pixel>& map, int span) {
