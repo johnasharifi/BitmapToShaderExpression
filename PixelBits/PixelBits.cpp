@@ -7,14 +7,8 @@
 
 int main()
 {
-	Pixel64 mpixel0 { 000, 000, 000, 000 };
-	// TODO fix this issue where value converted to 26
-	Pixel64 mpixel1;
-	mpixel1.r = 32;
-	mpixel1.g = 32;
-	mpixel1.b = 32;
-	mpixel1.a = 32;
-
+	Pixel64 mpixel0 { 0, 0, 0, 0 };
+	Pixel64 mpixel1 = { 32,32,32,32 };
 	Pixel64 mpixel2 { 255, 255, 255, 255 };
 
 	for (Pixel64 mpixel : {mpixel0, mpixel1, mpixel2}) {
