@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.28307.572
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BitmapToShaderExpression", "BitmapToShaderExpression\BitmapToShaderExpression.vcxproj", "{D1C856A8-9D30-4260-B491-C09E81F22380}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PixelBits", "PixelBits\PixelBits.vcxproj", "{CC1069D1-4026-4F4F-B7EC-2DFFC45A0960}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -21,6 +23,14 @@ Global
 		{D1C856A8-9D30-4260-B491-C09E81F22380}.Release|x64.Build.0 = Release|x64
 		{D1C856A8-9D30-4260-B491-C09E81F22380}.Release|x86.ActiveCfg = Release|Win32
 		{D1C856A8-9D30-4260-B491-C09E81F22380}.Release|x86.Build.0 = Release|Win32
+		{CC1069D1-4026-4F4F-B7EC-2DFFC45A0960}.Debug|x64.ActiveCfg = Debug|x64
+		{CC1069D1-4026-4F4F-B7EC-2DFFC45A0960}.Debug|x64.Build.0 = Debug|x64
+		{CC1069D1-4026-4F4F-B7EC-2DFFC45A0960}.Debug|x86.ActiveCfg = Debug|Win32
+		{CC1069D1-4026-4F4F-B7EC-2DFFC45A0960}.Debug|x86.Build.0 = Debug|Win32
+		{CC1069D1-4026-4F4F-B7EC-2DFFC45A0960}.Release|x64.ActiveCfg = Release|x64
+		{CC1069D1-4026-4F4F-B7EC-2DFFC45A0960}.Release|x64.Build.0 = Release|x64
+		{CC1069D1-4026-4F4F-B7EC-2DFFC45A0960}.Release|x86.ActiveCfg = Release|Win32
+		{CC1069D1-4026-4F4F-B7EC-2DFFC45A0960}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
