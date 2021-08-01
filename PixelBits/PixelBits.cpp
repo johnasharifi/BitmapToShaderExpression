@@ -20,21 +20,11 @@ int main()
 {
 	Pixel64 mpixel0(0);
 	Pixel64 mpixel1(3503345872); // 11010000 x 4
-	Pixel64 mpixel2(INT_MAX);
+	Pixel64 mpixel2(UINT_MAX);
 
 	for (Pixel64 mpixel : {mpixel0, mpixel1, mpixel2}) {
 		std::cout << "mpixel value is " << (std::string) mpixel << "with bits " << mpixel.getBits() << "\n";
 	}
-
-	// 32 + 128 + 512 + 8192 = 8864
-	unsigned int code1 = (32 << 0) | (32 << 2) | (32 << 4) | (32 << 8);
-	unsigned int code2 = (32 << 0) + (32 << 2) + (32 << 4) + (32 << 8);
-	std::cout << "code1 result is " << code1 << ". code2 result is " << code2 << "\n";
-
-    std::cout << "Hello World!\n";
-
-	unsigned int value = 3503345872;
-	std::cout << "value " << value << " becomes " << toBits(value) << "\n";
 
 	int code;
 	std::cin >> code;

@@ -11,6 +11,8 @@ public:
 
 	Pixel64(unsigned int bits) {
 		// assume that backer is an int32_t
+		// flush out the bigger bits
+		bits = (bits << 32) >> 32;
 		backer = bits;
 	}
 
