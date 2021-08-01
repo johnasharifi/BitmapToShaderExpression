@@ -5,22 +5,30 @@
 #include <iostream>
 #include "Pixel64.h"
 
+// debug utility
+std::string toBits(unsigned int value) {
+	std::string result;
+	const int bitCount = 64;
+	for (int i = 0; i < bitCount; ++i) {
+		result = std::to_string(value & 1) + result;
+		value = value >> 1;
+	}
+	return result;
+}
+
 int main()
 {
-	Pixel64 mpixel0{ 0, 0, 0, 0 };
-	Pixel64 mpixel1 = { 32,32,32,32 };
-	Pixel64 mpixel2{ 255, 255, 255, 255 };
+	Pixel64 mpixel0(0);
+	Pixel64 mpixel1(3503345872); // 11010000 x 4
+	Pixel64 mpixel2(UINT_MAX);
+
+	// set channel 'r' to 255
+	mpixel1.setChannel(2, 255);
+	mpixel1.setChannel(3, 0);
 
 	for (Pixel64 mpixel : {mpixel0, mpixel1, mpixel2}) {
 		std::cout << "mpixel value is " << (std::string) mpixel << "with bits " << mpixel.getBits() << "\n";
 	}
-
-	// 32 + 128 + 512 + 8192 = 8864
-	unsigned int code1 = (32 << 0) | (32 << 2) | (32 << 4) | (32 << 8);
-	unsigned int code2 = (32 << 0) + (32 << 2) + (32 << 4) + (32 << 8);
-	std::cout << "code1 result is " << code1 << ". code2 result is " << code2 << "\n";
-
-    std::cout << "Hello World!\n";
 
 	int code;
 	std::cin >> code;
