@@ -3,10 +3,17 @@
 
 #include "pch.h"
 #include <iostream>
+#include "Pixel64.h"
 
 int main()
 {
+	Pixel64 mpixel;
+	std::cout << "mpixel value is " << (std::string) mpixel << "\n";
+
     std::cout << "Hello World!\n"; 
+
+	int code;
+	std::cin >> code;
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
