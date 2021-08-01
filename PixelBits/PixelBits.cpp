@@ -7,15 +7,20 @@
 
 int main()
 {
-	Pixel64 mpixel0 { 0, 0, 0, 0 };
+	Pixel64 mpixel0{ 0, 0, 0, 0 };
 	Pixel64 mpixel1 = { 32,32,32,32 };
-	Pixel64 mpixel2 { 255, 255, 255, 255 };
+	Pixel64 mpixel2{ 255, 255, 255, 255 };
 
 	for (Pixel64 mpixel : {mpixel0, mpixel1, mpixel2}) {
 		std::cout << "mpixel value is " << (std::string) mpixel << "with bits " << mpixel.getBits() << "\n";
 	}
 
-    std::cout << "Hello World!\n"; 
+	// 32 + 128 + 512 + 8192 = 8864
+	unsigned int code1 = (32 << 0) | (32 << 2) | (32 << 4) | (32 << 8);
+	unsigned int code2 = (32 << 0) + (32 << 2) + (32 << 4) + (32 << 8);
+	std::cout << "code1 result is " << code1 << ". code2 result is " << code2 << "\n";
+
+    std::cout << "Hello World!\n";
 
 	int code;
 	std::cin >> code;
