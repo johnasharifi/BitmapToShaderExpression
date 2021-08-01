@@ -16,15 +16,21 @@ public:
 		backer = bits;
 	}
 
+	/// Given a query to a channel 0,1,2,3: get 0-255 / 8-bit data for that channel
+	unsigned short getChannel(int channel) const {
+		// channel = 0,1,2,3. shift by 0/8/16/24 bits
+		return (backer & (255 << (8 * channel))) >> (8 * channel);
+	}
+
+	unsigned short getR() const { return getChannel(0); }
+	unsigned short getG() const { return getChannel(1); }
+	unsigned short getB() const { return getChannel(2); }
+	unsigned short getA() const { return getChannel(3); }
+
 	explicit operator std::string () const {
 		std::string result;
 
-		unsigned short r = (backer & (255 << 24)) >> 24;
-		unsigned short g = (backer & (255 << 16)) >> 16;
-		unsigned short b = (backer & (255 << 8)) >> 8;
-		unsigned short a = (backer & (255 << 0)) >> 0;
-
-		for (unsigned short rgba : {r, g, b, a}) {
+		for (unsigned short rgba : {getR(), getG(), getB(), getA()}) {
 			std::string channel = std::to_string(rgba);
 			const int minLen = 3;
 			while (channel.size() < minLen) channel = "0" + channel;
@@ -36,12 +42,7 @@ public:
 	std::string getBits() const {
 		std::string result;
 
-		unsigned short r = (backer & (255 << 24)) >> 24;
-		unsigned short g = (backer & (255 << 16)) >> 16;
-		unsigned short b = (backer & (255 << 8)) >> 8;
-		unsigned short a = (backer & (255 << 0)) >> 0;
-
-		for (unsigned short rgba : {r, g, b, a}) {
+		for (unsigned short rgba : {getR(), getG(), getB(), getA()}) {
 			const int len = 8;
 			std::string channel = "";
 			for (int i = 0; i < len; ++i) {
