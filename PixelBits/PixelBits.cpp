@@ -6,7 +6,7 @@
 #include "Pixel64.h"
 
 // debug utility
-std::string toBits(int value) {
+std::string toBits(unsigned int value) {
 	std::string result;
 	const int bitCount = 64;
 	for (int i = 0; i < bitCount; ++i) {
@@ -21,6 +21,10 @@ int main()
 	Pixel64 mpixel0(0);
 	Pixel64 mpixel1(3503345872); // 11010000 x 4
 	Pixel64 mpixel2(UINT_MAX);
+
+	// set channel 'r' to 255
+	mpixel1.setChannel(2, 255);
+	mpixel1.setChannel(3, 0);
 
 	for (Pixel64 mpixel : {mpixel0, mpixel1, mpixel2}) {
 		std::cout << "mpixel value is " << (std::string) mpixel << "with bits " << mpixel.getBits() << "\n";
