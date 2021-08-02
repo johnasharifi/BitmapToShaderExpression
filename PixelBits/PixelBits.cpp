@@ -23,6 +23,8 @@ int main()
 	Pixel64 mpixel2(UINT_MAX);
 
 	// set channel 'r' to 255
+	mpixel1.setChannel(0, 255);
+	mpixel1.setChannel(1, 0);
 	mpixel1.setChannel(2, 255);
 	mpixel1.setChannel(3, 0);
 

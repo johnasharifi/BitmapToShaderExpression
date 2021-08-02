@@ -18,25 +18,17 @@ public:
 	}
 
 	void setChannel(int channel, unsigned short value) {
-		// this will be our new backer
-		unsigned int fValue = 0x00000000;
-
 		int maxi = 8 * (channel + 1);
 		int mini = 8 * (channel + 0);
-		for (int i = 0; i < 64; ++i) {
-			// check if bit in mini - maxi span. if so, get bit from value. else get bit from backer
-			int b = (backer & (1 << i));
-			if (mini <= i && i < maxi) {
-				// get ith bit of value
-				b = value & (1 << (i % 8));
-				// move into position to be logically OR'd with the unsigned int
-				b = b << (i - i % 8);
-			}
-			fValue = fValue | b;
-		}
 
-		// move bits
-		backer = fValue;
+		for (int i = mini; i < maxi; ++i) {
+			// get LSB of value
+			int biti = value & 1;
+			// delete LSB from value
+			value = value >> 1;
+
+			backer ^= (-biti ^ backer) & (1UL << i);
+		}
 	}
 
 	/// Given a query to a channel 0,1,2,3: get 0-255 / 8-bit data for that channel
